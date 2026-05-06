@@ -1,4 +1,4 @@
-# 🧮 Simple Calculator Web App
+# 🧮 Scientific Calculator Web App
 
 A simple and responsive calculator web application built using **HTML, CSS, and JavaScript**. This project performs basic arithmetic operations and helps strengthen core front-end development skills.
 
