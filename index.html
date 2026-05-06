@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <main class="calculator">
+            <header class="calc-header">
+                <div class="toggle-group">
+                    <button id="deg-btn" class="active">DEG</button>
+                    <button id="rad-btn">RAD</button>
+                </div>
+                <div class="toggle-group">
+                    <button id="theme-toggle" title="Toggle Theme"><i class="fas fa-sun"></i></button>
+                    <button id="history-toggle" title="Toggle History"><i class="fas fa-history"></i></button>
+                </div>
+            </header>
+
+            <div class="display">
+                <div class="expression-container">
+                    <div class="expression" id="expression"></div>
+                </div>
+                <div class="result" id="result">0</div>
+            </div>
+
+            <div class="memory-row">
+                <button class="mem-btn" data-action="mc" title="Memory Clear">MC</button>
+                <button class="mem-btn" data-action="mr" title="Memory Recall">MR</button>
+                <button class="mem-btn" data-action="m+" title="Memory Add">M+</button>
+                <button class="mem-btn" data-action="m-" title="Memory Subtract">M-</button>
+                <button class="mem-btn" data-action="ms" title="Memory Store">MS</button>
+            </div>
+
+            <div class="keypad">
+                <!-- Row 1 -->
+                <button class="btn sci-btn" id="btn-2nd" data-action="2nd">2<sup>nd</sup></button>
+                <button class="btn sci-btn" data-val="pi">π</button>
+                <button class="btn sci-btn" data-val="e">e</button>
+                <button class="btn action-btn top-action" data-action="clear">C</button>
+                <button class="btn action-btn top-action" data-action="backspace"><i class="fas fa-backspace"></i></button>
+
+                <!-- Row 2 -->
+                <button class="btn sci-btn toggleable" data-val="sin" data-alt="asin">sin</button>
+                <button class="btn sci-btn toggleable" data-val="cos" data-alt="acos">cos</button>
+                <button class="btn sci-btn toggleable" data-val="tan" data-alt="atan">tan</button>
+                <button class="btn sci-btn" data-val="exp">exp</button>
+                <button class="btn operator-btn" data-val="%">mod</button>
+
+                <!-- Row 3 -->
+                <button class="btn sci-btn" data-val="x^2">x²</button>
+                <button class="btn sci-btn" data-val="1/x">1/x</button>
+                <button class="btn sci-btn" data-val="abs">|x|</button>
+                <button class="btn paren-btn" data-val="(">(</button>
+                <button class="btn paren-btn" data-val=")">)</button>
+
+                <!-- Row 4 -->
+                <button class="btn sci-btn toggleable" data-val="sqrt" data-alt="cbrt">√x</button>
+                <button class="btn sci-btn" data-val="^">xʸ</button>
+                <button class="btn sci-btn" data-val="!">n!</button>
+                <button class="btn operator-btn" data-val="/">÷</button>
+                <button class="btn operator-btn" data-val="*">×</button>
+
+                <!-- Row 5 -->
+                <button class="btn sci-btn toggleable" data-val="10^" data-alt="2^">10ˣ</button>
+                <button class="btn num-btn" data-val="7">7</button>
+                <button class="btn num-btn" data-val="8">8</button>
+                <button class="btn num-btn" data-val="9">9</button>
+                <button class="btn operator-btn" data-val="-">−</button>
+
+                <!-- Row 6 -->
+                <button class="btn sci-btn" data-val="log">log</button>
+                <button class="btn num-btn" data-val="4">4</button>
+                <button class="btn num-btn" data-val="5">5</button>
+                <button class="btn num-btn" data-val="6">6</button>
+                <button class="btn operator-btn" data-val="+">+</button>
+
+                <!-- Row 7 -->
+                <button class="btn sci-btn" data-val="ln">ln</button>
+                <button class="btn num-btn" data-val="1">1</button>
+                <button class="btn num-btn" data-val="2">2</button>
+                <button class="btn num-btn" data-val="3">3</button>
+                <button class="btn operator-btn equals-btn" data-action="equals" rowspan="2">=</button>
+
+                <!-- Row 8 -->
+                <button class="btn action-btn copy-btn" data-action="copy" title="Copy to clipboard"><i class="far fa-copy"></i></button>
+                <button class="btn num-btn" data-val="0">0</button>
+                <button class="btn num-btn" data-val="00">00</button>
+                <button class="btn num-btn" data-val=".">.</button>
+            </div>
+        </main>
+
+        <aside class="history-panel" id="history-panel">
+            <div class="history-header">
+                <h2>History</h2>
+                <div>
+                    <button id="clear-history" title="Clear History"><i class="fas fa-trash"></i></button>
+                    <button id="close-history" class="mobile-only" title="Close History"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <ul class="history-list" id="history-list">
+                <!-- History items will be populated here -->
+            </ul>
+        </aside>
+    </div>
+
+    <!-- Audio element for button press sound -->
+    <!-- Using a base64 tiny click sound for reliability -->
+    <audio id="btn-sound" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA" preload="auto"></audio>
+
+    <script src="math_parser.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
