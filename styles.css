@@ -9,20 +9,20 @@
 :root {
     /* Light Theme */
     --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-    --calc-bg: rgba(255, 255, 255, 0.4);
-    --calc-border: rgba(255, 255, 255, 0.6);
-    --calc-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    --calc-bg: rgba(255, 255, 255, 0.85); /* Increased opacity for contrast */
+    --calc-border: rgba(255, 255, 255, 0.9);
+    --calc-shadow: 0 30px 60px rgba(31, 38, 135, 0.15), inset 0 2px 2px rgba(255, 255, 255, 0.8);
     --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --btn-bg: rgba(255, 255, 255, 0.5);
-    --btn-border: rgba(255, 255, 255, 0.7);
-    --btn-hover: rgba(255, 255, 255, 0.8);
-    --btn-active: rgba(255, 255, 255, 1);
+    --text-secondary: #64748b;
+    --btn-bg: rgba(255, 255, 255, 0.6);
+    --btn-border: rgba(255, 255, 255, 0.9);
+    --btn-hover: rgba(255, 255, 255, 1);
+    --btn-active: rgba(220, 230, 255, 0.8);
     --btn-operator-bg: rgba(99, 102, 241, 0.15);
-    --btn-operator-hover: rgba(99, 102, 241, 0.3);
+    --btn-operator-hover: rgba(99, 102, 241, 0.25);
     --btn-equals-bg: linear-gradient(135deg, #6366f1, #a855f7);
     --btn-equals-text: #ffffff;
-    --history-bg: rgba(255, 255, 255, 0.6);
+    --history-bg: rgba(255, 255, 255, 0.9);
     --accent: #6366f1;
     --danger: #ef4444;
 }
@@ -30,20 +30,20 @@
 body.dark-mode {
     /* Dark Theme */
     --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-    --calc-bg: rgba(15, 23, 42, 0.6);
-    --calc-border: rgba(255, 255, 255, 0.1);
-    --calc-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --calc-bg: rgba(0, 0, 0, 0.45); /* Dark frosted glass to contrast the background */
+    --calc-border: rgba(255, 255, 255, 0.15);
+    --calc-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 2px 2px rgba(255, 255, 255, 0.1);
     --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
+    --text-secondary: #94a3b8;
     --btn-bg: rgba(255, 255, 255, 0.05);
-    --btn-border: rgba(255, 255, 255, 0.1);
-    --btn-hover: rgba(255, 255, 255, 0.15);
-    --btn-active: rgba(255, 255, 255, 0.25);
+    --btn-border: rgba(255, 255, 255, 0.08);
+    --btn-hover: rgba(255, 255, 255, 0.12);
+    --btn-active: rgba(255, 255, 255, 0.2);
     --btn-operator-bg: rgba(99, 102, 241, 0.2);
-    --btn-operator-hover: rgba(99, 102, 241, 0.4);
+    --btn-operator-hover: rgba(99, 102, 241, 0.35);
     --btn-equals-bg: linear-gradient(135deg, #6366f1, #a855f7);
     --btn-equals-text: #ffffff;
-    --history-bg: rgba(15, 23, 42, 0.8);
+    --history-bg: rgba(0, 0, 0, 0.55);
     --accent: #818cf8;
     --danger: #f87171;
 }
@@ -68,15 +68,31 @@ body {
     margin: auto;
     position: relative;
     height: 90vh;
+    z-index: 1;
+}
+
+.app-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
+    opacity: 0.15;
+    filter: blur(80px);
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Glassmorphism utility */
 .glass {
     background: var(--calc-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--calc-border);
-    border-radius: 24px;
+    border-radius: 32px;
     box-shadow: var(--calc-shadow);
 }
 
@@ -84,13 +100,13 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    transition: all 0.3s ease;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     background: var(--calc-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--calc-border);
-    border-radius: 24px;
+    border-radius: 32px;
     box-shadow: var(--calc-shadow);
     min-width: 320px;
 }
@@ -215,26 +231,27 @@ body.dark-mode .display {
     background: var(--btn-bg);
     color: var(--text-primary);
     font-size: 1.2rem;
-    border-radius: 16px;
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.15s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), inset 0 2px 0 rgba(255, 255, 255, 0.1);
     user-select: none;
-    padding: 15px 0;
+    padding: 16px 0;
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
     background: var(--btn-active);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), inset 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
     background: var(--btn-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), inset 0 2px 0 rgba(255, 255, 255, 0.2);
 }
 
 .sci-btn {
